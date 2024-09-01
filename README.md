@@ -1,4 +1,4 @@
-# 🔍 Job Search Automation Script for Cloud Engineers in London, UK
+# 🔍 Job Search Automation Script for "Any Roles" according to the "Location"
 
 This Python script automates the process of searching for "Cloud Engineer" jobs in London, United Kingdom, and saves the job details to an Excel file. The data is fetched using the JSearch API, and the results are stored locally for easy access and further processing.
 
@@ -33,7 +33,7 @@ querystring = {"query": "Cloud Engineer in London,United Kingdom", "num_pages": 
 
 # Define headers for the API request
 headers = {
-    "x-rapidapi-key": "8787332dd6msh9a533fd1aeab0bbp1c30a1jsnf61b5fd23492",
+    "x-rapidapi-key": "Rapid-Key",
     "x-rapidapi-host": "jsearch.p.rapidapi.com"
 }
 
@@ -75,7 +75,7 @@ print(f"Excel file 'All_of_them.xlsx' created successfully in the Job folder.")
 
 ### 🔧 How to Use
 
-1. **Update API Key**: Replace `"8787332dd6msh9a533fd1aeab0bbp1c30a1jsnf61b5fd23492"` with your actual RapidAPI key in the `headers` dictionary.
+1. **Update API Key**: Replace `"Rapid Key"` with your actual RapidAPI key in the `headers` dictionary.
 
 2. **Run the Script**: Open your terminal or command prompt, navigate to the directory where the script is saved, and run:
 
@@ -94,7 +94,3 @@ print(f"Excel file 'All_of_them.xlsx' created successfully in the Job folder.")
 ### 📬 Contact
 
 For any questions or feedback, feel free to reach out to me on LinkedIn!
-
----
-
-This README format is optimized for LinkedIn, providing clear, concise instructions for anyone interested in using your script. It highlights the key features, installation steps, script details, usage instructions, and additional notes for ease of understanding and use.
