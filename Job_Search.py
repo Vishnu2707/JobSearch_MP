@@ -24,7 +24,7 @@ response = requests.get(url, headers=headers, params=querystring)
 data = response.json()
 
 # Extract job data from the JSON response
-jobs = data['data']  # List of job dictionaries
+jobs = data['data']  
 
 # Create a list to store the extracted job data
 job_list = []
@@ -43,13 +43,8 @@ for job in jobs:
     }
     job_list.append(job_info)
 
-# Convert the list of jobs to a DataFrame
+
 df = pd.DataFrame(job_list)
-
-# Get the user's home directory and construct the path to the Downloads folder
 downloads_path = os.path.join(os.path.expanduser("~"), "/Users/vishnuajith/Desktop/Job", "All_of_them.xlsx")
-
-# Save the DataFrame to an Excel file in the Downloads folder
 df.to_excel(downloads_path, index=False)
-
 print(f"Excel file 'All_of_them.xlsx' created successfully in the Job folder.")
