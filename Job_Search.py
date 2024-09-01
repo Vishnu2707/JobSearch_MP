@@ -2,6 +2,10 @@ import requests
 import pandas as pd
 import os
 from dotenv import load_dotenv
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.styles import Font
+from openpyxl.worksheet.hyperlink import Hyperlink
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -11,7 +15,7 @@ api_key = os.getenv("RAPIDAPI_KEY")
 
 # Define API URL and query parameters
 url = "https://jsearch.p.rapidapi.com/search"
-querystring = {"query": "Cloud Engineer in London,United Kingdom", "num_pages": "10", "date_posted": "all"}
+querystring = {"query": "Site Engineer in United Kingdom", "num_pages": "20", "date_posted": "all"}
 
 # Define headers for the API request
 headers = {
@@ -43,8 +47,31 @@ for job in jobs:
     }
     job_list.append(job_info)
 
-
+# Convert the list of jobs to a DataFrame
 df = pd.DataFrame(job_list)
+
+# Create a new workbook and sheet using openpyxl
+wb = Workbook()
+ws = wb.active
+ws.title = "Job Listings"
+
+# Append the DataFrame to the Excel sheet
+for r in dataframe_to_rows(df, index=False, header=True):
+    ws.append(r)
+
+# Make "Application Link" column clickable as a hyperlink
+for cell in ws["E"]:  # Column E is the "Application Link" column
+    if cell.row == 1:
+        continue  # Skip the header row
+    if cell.value:
+        # Create a hyperlink
+        cell.hyperlink = Hyperlink(ref=cell.coordinate, target=cell.value, display=cell.value)
+        cell.font = Font(color="0000FF", underline="single")
+
+# Define the path to save the Excel file
 downloads_path = os.path.join(os.path.expanduser("~"), "/Users/vishnuajith/Desktop/Job", "All_of_them.xlsx")
-df.to_excel(downloads_path, index=False)
-print(f"Excel file 'All_of_them.xlsx' created successfully in the Job folder.")
+
+# Save the workbook to the specified path
+wb.save(downloads_path)
+
+print(f"Excel file 'All_of_them.xlsx' created successfully in the Job folder with clickable links.")
